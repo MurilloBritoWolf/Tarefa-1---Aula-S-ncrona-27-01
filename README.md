@@ -62,9 +62,10 @@ O projeto envolve a utilização dos seguintes componentes conectados à placa *
 ---
 
 ## Link do Wokwi e Foto do Projeto
-[Inserir link do Wokwi aqui]
 
-![Imagem do Projeto](inserir-link-da-imagem-aqui)
+https://wokwi.com/projects/421716575566939137
+
+![image](https://github.com/user-attachments/assets/ea8df980-eec8-4bd1-9a41-ba1cafd1f699)
 
 ---
 
