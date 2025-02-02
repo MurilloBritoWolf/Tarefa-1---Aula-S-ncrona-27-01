@@ -34,7 +34,7 @@ O projeto envolve a utilização dos seguintes componentes conectados à placa *
 4. A matriz de LEDs **WS2812** deve exibir números de **1 a 9** de forma visualmente clara.
     - Formatação fixa: Cada número deve ser exibido em estilo digital (como segmentos iluminados formando os dígitos).
     - Alternativamente, é permitido um estilo criativo, desde que o número seja identificável.
-5. O display inicia apagado e apenas será ativado ao pressionar o **Botão A**.
+5. O display inicia ligado no numero 1.
 6. Ao atingir o número **9**, pressionar o **Botão A** não terá efeito.
 7. O **Botão B** só funcionará para decrementar os números de **9 a 1**.
 
