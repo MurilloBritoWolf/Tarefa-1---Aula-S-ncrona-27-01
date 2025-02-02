@@ -218,8 +218,6 @@ int main() {
     while (true) {
         // Chama a função para piscar o LED vermelho
         piscar_led_vermelho();
-
-        // Pode adicionar qualquer outra lógica aqui, se necessário
     }
 
     return 0;
