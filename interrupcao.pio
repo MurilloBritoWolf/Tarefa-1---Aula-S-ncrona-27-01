@@ -1,0 +1,45 @@
+.program interrupcao
+
+.wrap_target
+    out x, 1            ; Lê o próximo bit do FIFO para o registrador X
+    jmp !x do_zero      ; Se o bit for 0, pula para do_zero
+do_one:
+    set pins, 1 [4]     ; Se o bit for 1, define o pino como alto (com delay de 4 ciclos)
+    jmp cont            ; Pula para cont
+do_zero:
+    set pins, 1 [2]     ; Define o pino como alto (com delay de 2 ciclos)
+    set pins, 0 [2]     ; Define o pino como baixo (com delay de 2 ciclos)
+cont:
+    set pins, 0 [1]     ; Define o pino como baixo (com delay de 1 ciclo)
+.wrap
+
+% c-sdk {
+static inline void interrupcao_program_init(PIO pio, uint sm, uint offset, uint pin)
+{
+    pio_sm_config c = interrupcao_program_get_default_config(offset);
+
+    // Configura o pino como saída
+    sm_config_set_set_pins(&c, pin, 1);
+    pio_gpio_init(pio, pin);
+    pio_sm_set_consecutive_pindirs(pio, sm, pin, 1, true);
+
+    // Configura o clock para 8MHz
+    float div = clock_get_hz(clk_sys) / 8000000.0;
+    sm_config_set_clkdiv(&c, div);
+
+    // Configura o FIFO para uso exclusivo de TX
+    sm_config_set_fifo_join(&c, PIO_FIFO_JOIN_TX);
+
+    // Configura o deslocamento de saída (shift out)
+    sm_config_set_out_shift(&c, false, true, 24);
+
+    // Configura o comportamento de saída
+    sm_config_set_out_special(&c, true, false, false);
+
+    // Inicializa o state machine
+    pio_sm_init(pio, sm, offset, &c);
+
+    // Habilita o state machine
+    pio_sm_set_enabled(pio, sm, true);
+}
+%}
